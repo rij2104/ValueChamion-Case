@@ -1,0 +1,78 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[3]:
+
+
+import twitterscraper
+import datetime as dt
+import pandas as pd
+
+
+# In[4]:
+
+
+lang='english'
+
+
+# In[5]:
+
+
+# Scrape Tweets
+handle = 'HarvardHBS'
+
+
+# In[6]:
+
+
+out = twitterscraper.query_tweets_from_user(handle)
+
+
+# In[7]:
+
+
+# Create Empty storage
+df = pd.DataFrame()
+Date = []
+Text = []
+Likes = []
+Retweets = []
+
+
+# In[8]:
+
+
+# Read data into respective columns
+for tweet in out:
+    Date.append(tweet.timestamp)
+    Text.append(tweet.text)
+    Likes.append(tweet.likes)
+    Retweets.append(tweet.retweets)
+
+
+# In[9]:
+
+
+# Turn into csv
+df['Date'] = Date
+df['Text'] = Text
+df['Likes'] = Likes
+df['Retweets'] = Retweets
+df.to_csv('HarvardHBS.csv')
+
+
+# In[10]:
+
+
+print('----------------------------')
+print('----------------------------')
+print('----------------------------')
+print('Tweets scraped!!!')
+print('Total Number? ' + str(len(df)))
+
+
+# In[ ]:
+
+
+
+
